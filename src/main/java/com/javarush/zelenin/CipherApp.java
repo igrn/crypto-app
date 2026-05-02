@@ -1,6 +1,11 @@
 package com.javarush.zelenin;
 
+import com.javarush.zelenin.cipher.CaesarCipher;
+import com.javarush.zelenin.file.FileManager;
+
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class CipherApp {
 
@@ -33,7 +38,35 @@ public class CipherApp {
         switch (code) {
             //1. Режим шифрования
             case 1:
-                System.out.println("Выбран режим шифрования.");
+                System.out.println("Выбран режим шифрования (1).");
+                System.out.print("Введите путь к файлу: ");
+
+                FileManager fileManager = new FileManager();
+                String filePath = scanner.nextLine();
+
+                try (Stream<String> lines = fileManager.readFile(filePath)) {
+                    CaesarCipher cipher = new CaesarCipher();
+
+                    System.out.print("Введите секретный ключ: ");
+                    int key = Integer.parseInt(scanner.nextLine());
+                    Stream<String> encryptedLines = lines.map(line -> cipher.encrypt(line, key));
+
+                    System.out.print("Введите название нового файла (без расширения): ");
+                    String encryptedFilePath = FileManager.constructOutputPath(filePath, scanner.nextLine()).toString();
+                    System.out.println("Зашифрованный файл будет создан по следующему пути: " + encryptedFilePath);
+
+                    //TODO файл уже существует
+                    fileManager.writeFile(encryptedLines, encryptedFilePath);
+
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e); //TODO прописать исключения
+                } catch (NumberFormatException e) {
+                    System.out.println("[WARN] Необходимо ввести целое число ."); //TODO в каких пределах?
+                    System.out.print("Введите секретный ключ: ");
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Введите название нового файла (без расширения): ");
+                }
                 break;
             //2. Режим расшифровки
             case 2:
