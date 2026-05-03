@@ -1,4 +1,4 @@
-package com.javarush.zelenin.file;
+package com.javarush.zelenin.util.io;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,4 +31,7 @@ public class FileManager {
 
         return Path.of(expandedPath).toAbsolutePath().normalize();
     }
+
+    //TODO Добавить валидатор
+
 }

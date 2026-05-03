@@ -1,7 +1,7 @@
 package com.javarush.zelenin;
 
-import com.javarush.zelenin.cipher.CaesarCipher;
-import com.javarush.zelenin.file.FileManager;
+import com.javarush.zelenin.algorithms.ciphers.CaesarCipher;
+import com.javarush.zelenin.util.io.FileManager;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -34,6 +34,7 @@ public class CipherApp {
             }
         }
 
+        //TODO добавить обработку дефолтного файла (text/text.txt)
         //Работа по выбранному сценарию
         switch (code) {
             //1. Режим шифрования

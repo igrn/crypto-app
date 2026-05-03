@@ -1,4 +1,4 @@
-package com.javarush.zelenin.cipher;
+package com.javarush.zelenin.interfaces;
 
 public interface Cipher<T> {
 
