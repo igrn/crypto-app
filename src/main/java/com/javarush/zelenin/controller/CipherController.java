@@ -1,14 +1,16 @@
 package com.javarush.zelenin.controller;
 
-import com.javarush.zelenin.scenario.Encrypt;
+import com.javarush.zelenin.scenario.Scenario;
 
 import java.util.Scanner;
 
-public class EncryptController {
-    private final Encrypt encrypt;
+public class CipherController {
+    private final Scenario encrypt;
+    private final Scenario decrypt;
 
-    public EncryptController(Encrypt encrypt) {
+    public CipherController(Scenario encrypt, Scenario decrypt) {
         this.encrypt = encrypt;
+        this.decrypt = decrypt;
     }
 
     //TODO убрать scanner с этого уровня
@@ -18,4 +20,6 @@ public class EncryptController {
 
         encrypt.execute(scanner);
     }
+
+    public void handleDecryption() {}
 }

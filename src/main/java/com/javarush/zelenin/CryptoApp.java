@@ -6,17 +6,14 @@ import com.javarush.zelenin.ui.console.ConsoleRunner;
 
 import java.util.Scanner;
 
-public class CipherApp {
+public class CryptoApp {
 
     public static void main(String[] args) {
-        ControllerRegistry controllers = new ControllerRegistry(
-                new EncryptController(new Encrypt()),
-                new DecryptController(new Decrypt()),
-                new BruteForceController(new BruteForce()),
-                new StatAnalysisController(new Analyze())
-        );
-
         Scanner userInput = new Scanner(System.in);
+        ControllerRegistry controllers = new ControllerRegistry(
+                new CipherController(new Encrypt(), new Decrypt()),
+                new AnalyzerController(new BruteForce(), new Analyze())
+        );
         new ConsoleRunner(userInput, controllers).run();
     }
 }

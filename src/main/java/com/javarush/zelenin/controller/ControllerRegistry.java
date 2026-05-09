@@ -1,7 +1,5 @@
 package com.javarush.zelenin.controller;
 
-public record ControllerRegistry(EncryptController encryptController,
-                                 DecryptController decryptController,
-                                 BruteForceController bruteForceController,
-                                 StatAnalysisController statAnalysisController) {
+public record ControllerRegistry(CipherController cipherController,
+                                 AnalyzerController analyzerController) {
 }

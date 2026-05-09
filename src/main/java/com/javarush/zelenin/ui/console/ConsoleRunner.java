@@ -16,10 +16,10 @@ public class ConsoleRunner {
 
     public void run() {
         switch (getMode()) {
-            case 1 -> controllers.encryptController().handleEncryption(userInput); //TODO убрать userInput
-            case 2 -> controllers.decryptController().handleDecryption();
-            case 3 -> controllers.bruteForceController().handleBruteForce();
-            case 4 -> controllers.statAnalysisController().handleStatAnalysis();
+            case 1 -> controllers.cipherController().handleEncryption(userInput); //TODO убрать userInput
+            case 2 -> controllers.cipherController().handleDecryption();
+            case 3 -> controllers.analyzerController().handleBruteForce();
+            case 4 -> controllers.analyzerController().handleStatAnalysis();
             case 0 -> System.out.println("Выход из приложения"); //TODO обработчик
         }
     }
