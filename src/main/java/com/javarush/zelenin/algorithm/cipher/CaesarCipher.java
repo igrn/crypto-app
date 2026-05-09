@@ -1,6 +1,4 @@
-package com.javarush.zelenin.algorithms.ciphers;
-
-import com.javarush.zelenin.interfaces.Cipher;
+package com.javarush.zelenin.algorithm.cipher;
 
 public class CaesarCipher implements Cipher<Integer> {
     private static final String ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";

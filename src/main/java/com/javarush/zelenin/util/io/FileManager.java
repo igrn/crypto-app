@@ -15,6 +15,7 @@ public class FileManager {
         Files.write(getFullPath(filePath), (Iterable<String>) lines::iterator);
     }
 
+    //TODO добавить возможность записывать файл, если указал с раширением (иначе исключение)
     public static Path constructOutputPath(String filePath, String newFileName) {
         String originalFile = getFullPath(filePath).getFileName().toString();
 
