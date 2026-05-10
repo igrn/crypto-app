@@ -1,25 +1,22 @@
 package com.javarush.zelenin.controller;
 
-import com.javarush.zelenin.scenario.Scenario;
-
-import java.util.Scanner;
+import com.javarush.zelenin.dto.ParamsDto;
+import com.javarush.zelenin.service.CipherService;
 
 public class CipherController {
-    private final Scenario encrypt;
-    private final Scenario decrypt;
+    private final CipherService cipherService;
 
-    public CipherController(Scenario encrypt, Scenario decrypt) {
-        this.encrypt = encrypt;
-        this.decrypt = decrypt;
+    public CipherController(CipherService cipherService) {
+        this.cipherService = cipherService;
     }
 
-    //TODO убрать scanner с этого уровня
-    public void handleEncryption(Scanner scanner) {
-        System.out.println("Выбран режим шифрования (1).");
-        System.out.print("Введите путь к файлу: ");
+    public void handleEncryption(ParamsDto paramsDto) {
+        try {
+            cipherService.handleEncryption(paramsDto);
+        } catch (NumberFormatException e) {
 
-        encrypt.execute(scanner);
+        }
     }
 
-    public void handleDecryption() {}
+    public void handleDecryption(ParamsDto paramsDto) {}
 }

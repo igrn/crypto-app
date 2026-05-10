@@ -4,6 +4,11 @@ public class CaesarCipher implements Cipher<Integer> {
     private static final String ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
 
     @Override
+    public Integer parseKey(String key) {
+        return Integer.parseInt(key);
+    }
+
+    @Override
     public String encrypt(String text, Integer key) {
         return process(text, key);
     }

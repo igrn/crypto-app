@@ -7,11 +7,11 @@ import java.util.stream.Stream;
 
 public class FileManager {
 
-    public Stream<String> readFile(String filePath) throws IOException {
+    public static Stream<String> readFile(String filePath) throws IOException {
         return Files.lines(getFullPath(filePath));
     }
 
-    public void writeFile(Stream<String> lines, String filePath) throws IOException {
+    public static void writeFile(Stream<String> lines, String filePath) throws IOException {
         Files.write(getFullPath(filePath), (Iterable<String>) lines::iterator);
     }
 
@@ -25,6 +25,7 @@ public class FileManager {
         return Path.of(getFullPath(filePath).getParent().toString(), newFileName + ".txt");
     }
 
+    //TODO по возможности private
     public static Path getFullPath(String filePath) {
         String expandedPath = filePath.startsWith("~")
                 ? filePath.replaceFirst("^~", System.getProperty("user.home"))
