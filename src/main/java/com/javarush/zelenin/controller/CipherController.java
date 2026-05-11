@@ -18,5 +18,7 @@ public class CipherController {
         }
     }
 
-    public void handleDecryption(Params params) {}
+    public void handleDecryption(Params params) {
+        cipherService.handleDecryption(params);
+    }
 }

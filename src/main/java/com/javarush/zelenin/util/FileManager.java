@@ -1,4 +1,4 @@
-package com.javarush.zelenin.util.io;
+package com.javarush.zelenin.util;
 
 import java.io.IOException;
 import java.nio.file.Files;
