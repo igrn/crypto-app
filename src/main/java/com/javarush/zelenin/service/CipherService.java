@@ -14,15 +14,11 @@ public class CipherService {
         Cipher<T> cipher = (Cipher<T>) params.algorithm().createCipher();
         T key = cipher.parseKey(params.key());
 
-        //TODO добавить обработку дефолтного файла (text/text.txt)
         try (Stream<String> lines = FileManager.readFile(params.sourcePath())) {
             Stream<String> encryptedLines = lines.map(line -> cipher.encrypt(line, key));
-            String encryptedFilePath = FileManager.constructOutputPath(
-                    params.sourcePath(), params.destinationPath()).toString();
-
-            FileManager.writeFile(encryptedLines, encryptedFilePath);
+            FileManager.writeFile(encryptedLines, params.destinationPath());
         } catch (IOException e) {
-            throw new RuntimeException(e.getMessage()); //TODO прописать исключения
+            throw new RuntimeException(e.getMessage());
         }
     }
 

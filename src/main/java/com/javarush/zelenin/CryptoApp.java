@@ -1,8 +1,8 @@
 package com.javarush.zelenin;
 
 import com.javarush.zelenin.controller.AnalyzerController;
-import com.javarush.zelenin.controller.CipherController;
 import com.javarush.zelenin.controller.AppControllers;
+import com.javarush.zelenin.controller.CipherController;
 import com.javarush.zelenin.service.CipherService;
 import com.javarush.zelenin.ui.console.ConsoleMenu;
 import com.javarush.zelenin.ui.console.ConsoleRunner;

@@ -14,7 +14,7 @@ public class CipherController {
         try {
             cipherService.handleEncryption(params);
         } catch (NumberFormatException e) {
-
+            //TODO обработка исключений
         }
     }
 

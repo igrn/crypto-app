@@ -34,9 +34,9 @@ public class ConsoleMenu {
         if (mode == 0) return null;
 
         System.out.printf(Message.SOURCE_PATH, Message.DEFAULTS[0][mode]);
-        String sourcePath = readWithDefault(Message.DEFAULTS[0][mode]);
+        String sourcePath = readWithDefault("text/" + Message.DEFAULTS[0][mode]);
         System.out.printf(Message.DESTINATION_PATH, Message.DEFAULTS[1][mode]);
-        String destinationPath = readWithDefault(Message.DEFAULTS[1][mode]);
+        String destinationPath = readWithDefault("text/" + Message.DEFAULTS[1][mode]);
 
         if (mode > 2) {
             return new Params(sourcePath, destinationPath, "", CAESAR);
