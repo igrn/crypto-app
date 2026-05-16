@@ -19,5 +19,5 @@ public class AnalyzerController {
         cipherService.handleDecryption(paramsWithKey);
     }
 
-    public void handleStatAnalysis() {}
+    public void handleAnalysis() {}
 }

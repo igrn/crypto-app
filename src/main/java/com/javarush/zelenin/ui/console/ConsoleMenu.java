@@ -1,10 +1,9 @@
 package com.javarush.zelenin.ui.console;
 
+import com.javarush.zelenin.algorithm.Algorithm;
 import com.javarush.zelenin.dto.Params;
 
 import java.util.Scanner;
-
-import static com.javarush.zelenin.algorithm.cipher.Cipher.Algorithm.CAESAR;
 
 public class ConsoleMenu {
     private final Scanner userInput;
@@ -31,7 +30,7 @@ public class ConsoleMenu {
     }
 
     public Params getParams(Integer mode) {
-        if (mode == 0) return null;
+        if (mode == 0) return null; //TODO убрать null
 
         System.out.printf(Message.SOURCE_PATH, Message.DEFAULTS[0][mode]);
         String sourcePath = readWithDefault("text/" + Message.DEFAULTS[0][mode]);
@@ -39,11 +38,11 @@ public class ConsoleMenu {
         String destinationPath = readWithDefault("text/" + Message.DEFAULTS[1][mode]);
 
         if (mode > 2) {
-            return new Params(sourcePath, destinationPath, "", CAESAR);
+            return new Params(sourcePath, destinationPath, "", Algorithm.CAESAR);
         }
         System.out.print(Message.SECRET_KEY);
         String key = readWithDefault("1");
-        return new Params(sourcePath, destinationPath, key, CAESAR);
+        return new Params(sourcePath, destinationPath, key, Algorithm.CAESAR);
     }
 
     private String readWithDefault(String defaultInput) {

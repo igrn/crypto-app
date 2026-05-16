@@ -1,6 +1,6 @@
 package com.javarush.zelenin.dto;
 
-import com.javarush.zelenin.algorithm.cipher.Cipher;
+import com.javarush.zelenin.algorithm.Algorithm;
 
 public record Params(String sourcePath, String destinationPath,
-                     String key, Cipher.Algorithm algorithm) { }
+                     String key, Algorithm algorithm) { }

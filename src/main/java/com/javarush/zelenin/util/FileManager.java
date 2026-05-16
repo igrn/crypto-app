@@ -5,7 +5,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
-public class FileManager {
+public final class FileManager {
+
+    private FileManager() {
+        throw new UnsupportedOperationException(); //TODO сообщение исключения
+    }
 
     public static Stream<String> readFile(String filePath) throws IOException {
         return Files.lines(resolvePath(filePath));

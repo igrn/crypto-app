@@ -20,7 +20,7 @@ public class ConsoleRunner {
             case 1 -> controllers.cipherController().handleEncryption(params);
             case 2 -> controllers.cipherController().handleDecryption(params);
             case 3 -> controllers.analyzerController().handleBruteForce(params);
-            case 4 -> controllers.analyzerController().handleStatAnalysis();
+            case 4 -> controllers.analyzerController().handleAnalysis();
         }
     }
 }

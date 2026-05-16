@@ -20,13 +20,12 @@ public class CipherService {
 
     @SuppressWarnings("unchecked")
     private static <T> void process(Params params, TriFunction<Cipher<T>, String, T, String> operation) {
-        Cipher<T> cipher = (Cipher<T>) params.algorithm().createCipher();
-        T key = cipher.parseKey(params.key());
-
         try (Stream<String> lines = FileManager.readFile(params.sourcePath())) {
+            Cipher<T> cipher = (Cipher<T>) params.algorithm().createCipher();
+            T key = cipher.parseKey(params.key());
             Stream<String> processedLines = lines.map(line -> operation.apply(cipher, line, key));
             FileManager.writeFile(processedLines, params.destinationPath());
-        } catch (IOException e) {
+        } catch (IOException | NumberFormatException e) {
             throw new RuntimeException(e.getMessage());
         }
     }

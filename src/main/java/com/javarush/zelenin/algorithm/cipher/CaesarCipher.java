@@ -10,30 +10,25 @@ public class CaesarCipher implements Cipher<Integer> {
 
     @Override
     public String encrypt(String text, Integer key) {
-        return process(text, key);
+        return transform(text, key);
     }
 
     @Override
     public String decrypt(String text, Integer key) {
-        return process(text, -key);
+        return transform(text, -key);
     }
 
-    //В случае с шифром Цезаря, шифрование и расшифровка идут по одному алгоритму
-    private static String process(String text, Integer key) {
-        StringBuilder result = new StringBuilder();
+    private static String transform(String text, Integer key) {
+        return text.chars()
+                .map(symbol -> {
+                    int pos = ALPHABET.indexOf(Character.toLowerCase(symbol));
+                    if (pos == -1) return symbol;
 
-        for (char symbol : text.toCharArray()) {
-            int pos = ALPHABET.indexOf(Character.toLowerCase(symbol));
-
-            if (pos != -1) {
-                int newPos = Math.floorMod(pos + key, ALPHABET.length());
-                char newSymbol = Character.isLowerCase(symbol) ? ALPHABET.charAt(newPos)
-                        : Character.toUpperCase(ALPHABET.charAt(newPos));
-                result.append(newSymbol);
-            } else {
-                result.append(symbol); //я решил пропускать спецсимволы, пробелы и символы из других языков
-            }
-        }
-        return result.toString();
+                    int newPos = Math.floorMod(pos + key, ALPHABET.length());
+                    char newLetter = ALPHABET.charAt(newPos);
+                    return Character.isLowerCase(symbol) ? newLetter : Character.toUpperCase(newLetter);
+                })
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
     }
 }
