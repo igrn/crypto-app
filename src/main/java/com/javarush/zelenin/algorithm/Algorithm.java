@@ -5,25 +5,27 @@ import com.javarush.zelenin.algorithm.analyzer.CaesarAnalyzer;
 import com.javarush.zelenin.algorithm.cipher.CaesarCipher;
 import com.javarush.zelenin.algorithm.cipher.Cipher;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unchecked")
 public enum Algorithm {
-    CAESAR(CaesarCipher::new, CaesarAnalyzer::new);
+    CAESAR(CaesarCipher::new, cipher -> new CaesarAnalyzer((CaesarCipher) cipher));
 
     private final Supplier<Cipher<?>> cipherFactory;
-    private final Supplier<Analyzer<?>> analyzerFactory;
+    private final Function<Cipher<?>, Analyzer<?>> analyzerFactory;
 
     Algorithm(Supplier<Cipher<?>> cipherFactory,
-              Supplier<Analyzer<?>> analyzerFactory) {
+              Function<Cipher<?>, Analyzer<?>> analyzerFactory) {
         this.cipherFactory = cipherFactory;
         this.analyzerFactory = analyzerFactory;
     }
 
-    public Cipher<?> createCipher() {
-        return cipherFactory.get();
+    public <T> Cipher<T> createCipher() {
+        return (Cipher<T>) cipherFactory.get();
     }
 
-    public Analyzer<?> createAnalyzer() {
-        return analyzerFactory.get();
+    public <T> Analyzer<T> createAnalyzer(Cipher<T> cipher) {
+        return (Analyzer<T>) analyzerFactory.apply(cipher);
     }
 }
