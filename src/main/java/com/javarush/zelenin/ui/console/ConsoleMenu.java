@@ -2,6 +2,7 @@ package com.javarush.zelenin.ui.console;
 
 import com.javarush.zelenin.algorithm.Algorithm;
 import com.javarush.zelenin.dto.Params;
+import com.javarush.zelenin.util.Const;
 
 import java.util.Scanner;
 
@@ -30,18 +31,20 @@ public class ConsoleMenu {
     }
 
     public Params getParams(Integer mode) {
-        if (mode == 0) return null; //TODO убрать null
+        if (mode == 0) return new Params("", "", "", Algorithm.CAESAR);
 
-        System.out.printf(Message.SOURCE_PATH, Message.DEFAULTS[0][mode]);
-        String sourcePath = readWithDefault("text/" + Message.DEFAULTS[0][mode]);
-        System.out.printf(Message.DESTINATION_PATH, Message.DEFAULTS[1][mode]);
-        String destinationPath = readWithDefault("text/" + Message.DEFAULTS[1][mode]);
+        String defaultFileName = Const.SOURCE_FILENAMES[mode];
+        System.out.printf(Message.SOURCE_PATH, defaultFileName);
+        String sourcePath = readWithDefault(Const.DEFAULT_PATH.formatted(defaultFileName));
+        defaultFileName = Const.DESTINATION_FILENAMES[mode];
+        System.out.printf(Message.DESTINATION_PATH, defaultFileName);
+        String destinationPath = readWithDefault(Const.DEFAULT_PATH.formatted(defaultFileName));
 
         if (mode > 2) {
             return new Params(sourcePath, destinationPath, "", Algorithm.CAESAR);
         }
-        System.out.print(Message.SECRET_KEY);
-        String key = readWithDefault("1");
+        System.out.print(Message.ENTER_KEY);
+        String key = readWithDefault(Const.DEFAULT_KEY);
         return new Params(sourcePath, destinationPath, key, Algorithm.CAESAR);
     }
 

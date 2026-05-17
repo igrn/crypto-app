@@ -1,49 +1,38 @@
 package com.javarush.zelenin.ui.console;
 
 public interface Message {
-    String WELCOME = "Добро пожаловать в CryptoApp!\n";
-    String CURRENT_VERSION = "Текущая версия: v1.0-SNAPSHOT\n";
-    String SELECT_MODE = "Выберите режим работы: ";
+    String WELCOME = "Welcome to CryptoApp!\n";
+    String CURRENT_VERSION = "Current version: v1.0-SNAPSHOT\n";
+    String SELECT_MODE = "Select mode: ";
     String LINE = "-".repeat(25) + "\n";
 
     String MODE_SELECTION_MENU = WELCOME + CURRENT_VERSION + LINE + """
-            Доступны следующие режимы работы:
-            1. Шифрование
-            2. Расшифровка с ключом
-            3. Brute force
-            4. Статистический анализ
-            0. Выход
+            Available modes:
+            1. Encryption
+            2. Decryption
+            3. Brute-force
+            4. Analysis
+            0. Exit
             """ + LINE + SELECT_MODE;
 
-    String INCORRECT_MODE_SELECTION = "Необходимо ввести целое число от 0 до 4.";
-
     String[] SELECTED_MODE = {
-            "Выход из приложения.",
-            "\nВыбран режим шифрования.",
-            "\nВыбран режим расшифровки.",
-            "\nВыбран режим brute force.",
-            "\nВыбран режим статистического анализа."
+            "Exiting app.",
+            "\nSelected encryption mode.",
+            "\nSelected decryption mode.",
+            "\nSelected brute-force mode.",
+            "\nSelected analysis mode."
     };
 
-    String SOURCE_PATH = LINE + """
-            1. Введите путь к оригинальному файлу:
-               - Путь целиком (с названием файла)
-               - Название файла (поиск в папке ./text)
-               - Пропуск через ENTER (файл по-умолчанию ./text/%s)
-            """ + LINE + "Введите путь: ";
+    String PATH_OPTIONS = """
+               - Full path (with file name)
+               - File name only (default path = ./text)
+               - Skip with ENTER (default file = ./text/%s.txt)
+            """;
+    String ENTER_PATH = "Enter path: ";
+    String SOURCE_PATH = LINE + "1. Enter source path:\n" + PATH_OPTIONS + LINE + ENTER_PATH;
+    String DESTINATION_PATH = LINE + "2. Enter destination path:\n" + PATH_OPTIONS + LINE + ENTER_PATH;
+    String ENTER_KEY = LINE + "3. Enter key (default = 1): ";
 
-    String DESTINATION_PATH = LINE + """
-            2. Введите путь к создаваемому файлу:
-               - Путь целиком (с названием файла)
-               - Название файла (будет создан в папке ./text)
-               - Пропуск через ENTER (файл по-умолчанию ./text/%s)
-            """ + LINE + "Введите путь: ";
-
-    String[][] DEFAULTS = {
-            { "SOURCE", "text.txt", "encrypted.txt", "encrypted.txt", "encrypted.txt" },
-            { "DESTINATION", "encrypted.txt", "decrypted.txt", "bruteforce.txt", "analyzed.txt" }
-    };
-
-    String SECRET_KEY = LINE + "3. Введите секретный ключ (ENTER = 1): ";
+    String INCORRECT_MODE_SELECTION = "A whole number from 0 to 4 is required.";
 
 }
