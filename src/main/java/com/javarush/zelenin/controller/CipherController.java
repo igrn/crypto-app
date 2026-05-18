@@ -1,6 +1,9 @@
 package com.javarush.zelenin.controller;
 
 import com.javarush.zelenin.dto.Params;
+import com.javarush.zelenin.dto.Result;
+import com.javarush.zelenin.dto.Result.Code;
+import com.javarush.zelenin.exception.AppException;
 import com.javarush.zelenin.service.CipherService;
 
 public class CipherController {
@@ -10,15 +13,19 @@ public class CipherController {
         this.cipherService = cipherService;
     }
 
-    public void handleEncryption(Params params) {
+    public Result handleEncryption(Params params) {
         try {
-            cipherService.handleEncryption(params);
-        } catch (NumberFormatException e) {
-            //TODO обработка исключений
+            return cipherService.handleEncryption(params);
+        } catch (AppException e) {
+            return new Result(Code.ERROR, e.getMessage());
         }
     }
 
-    public void handleDecryption(Params params) {
-        cipherService.handleDecryption(params);
+    public Result handleDecryption(Params params) {
+        try {
+            return cipherService.handleDecryption(params);
+        } catch (AppException e) {
+            return new Result(Code.ERROR, e.getMessage());
+        }
     }
 }

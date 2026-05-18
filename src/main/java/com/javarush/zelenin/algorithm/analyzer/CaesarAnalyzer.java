@@ -1,7 +1,7 @@
 package com.javarush.zelenin.algorithm.analyzer;
 
 import com.javarush.zelenin.algorithm.cipher.CaesarCipher;
-import com.javarush.zelenin.util.Const;
+import com.javarush.zelenin.constant.Const;
 
 import java.util.HashMap;
 import java.util.Map;

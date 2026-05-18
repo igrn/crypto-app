@@ -1,4 +1,4 @@
-package com.javarush.zelenin.util;
+package com.javarush.zelenin.constant;
 
 import java.io.File;
 import java.util.Map;
@@ -31,5 +31,7 @@ public interface Const {
     String DEFAULT_PATH = "text" + File.separator + "%s.txt";
     String[] SOURCE_FILENAMES = { "", "text", "encrypted", "encrypted", "encrypted" };
     String[] DESTINATION_FILENAMES = { "", "encrypted", "decrypted", "bruteforce", "analyzed" };
+    String INCORRECT_FILE = "Incorrect file: ";
+    String UNSUPPORTED_ORERATION = "Unsupported operation";
 
 }

@@ -1,6 +1,6 @@
 package com.javarush.zelenin.algorithm.cipher;
 
-import com.javarush.zelenin.util.Const;
+import com.javarush.zelenin.constant.Const;
 
 public class CaesarCipher implements Cipher<Integer> {
 

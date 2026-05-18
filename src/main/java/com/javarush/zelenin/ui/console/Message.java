@@ -15,8 +15,9 @@ public interface Message {
             0. Exit
             """ + LINE + SELECT_MODE;
 
+    String INVALID_MODE = "A whole number from 0 to 4 is required.";
     String[] SELECTED_MODE = {
-            "Exiting app.",
+            "Application closed.",
             "\nSelected encryption mode.",
             "\nSelected decryption mode.",
             "\nSelected brute-force mode.",
@@ -31,8 +32,9 @@ public interface Message {
     String ENTER_PATH = "Enter path: ";
     String SOURCE_PATH = LINE + "1. Enter source path:\n" + PATH_OPTIONS + LINE + ENTER_PATH;
     String DESTINATION_PATH = LINE + "2. Enter destination path:\n" + PATH_OPTIONS + LINE + ENTER_PATH;
-    String ENTER_KEY = LINE + "3. Enter key (default = 1): ";
+    String ENTER_KEY = LINE + "3. Enter key (default = %s): ";
 
-    String INCORRECT_MODE_SELECTION = "A whole number from 0 to 4 is required.";
+    String RESULT_OK = "\nTask successful.\nOutput file: %s";
+    String RESULT_ERROR = "\nTask failed.\n%s";
 
 }

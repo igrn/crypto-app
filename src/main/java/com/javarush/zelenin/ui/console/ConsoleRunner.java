@@ -2,6 +2,8 @@ package com.javarush.zelenin.ui.console;
 
 import com.javarush.zelenin.controller.AppControllers;
 import com.javarush.zelenin.dto.Params;
+import com.javarush.zelenin.dto.Result;
+import com.javarush.zelenin.ui.console.ConsoleMenu.Mode;
 
 public class ConsoleRunner {
     private final ConsoleMenu consoleMenu;
@@ -13,14 +15,16 @@ public class ConsoleRunner {
     }
 
     public void run() {
-        int mode = consoleMenu.getMode();
-        Params params = consoleMenu.getParams(mode);
+        Mode mode = consoleMenu.selectMode();
+        Params params = consoleMenu.createParams(mode);
 
-        switch (mode) {
-            case 1 -> controllers.cipherController().handleEncryption(params);
-            case 2 -> controllers.cipherController().handleDecryption(params);
-            case 3 -> controllers.analyzerController().handleBruteForce(params);
-            case 4 -> controllers.analyzerController().handleAnalysis(params);
-        }
+        Result result = switch (mode) {
+            case ENCRYPT -> controllers.cipherController().handleEncryption(params);
+            case DECRYPT -> controllers.cipherController().handleDecryption(params);
+            case BRUTEFORCE -> controllers.analyzerController().handleBruteForce(params);
+            case ANALYZE -> controllers.analyzerController().handleAnalysis(params);
+            case EXIT -> controllers.exitController().exitApplication();
+        };
+        consoleMenu.printResult(result);
     }
 }
