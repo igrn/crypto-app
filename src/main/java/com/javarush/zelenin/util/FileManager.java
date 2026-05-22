@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public final class FileManager {
 
     private FileManager() {
-        throw new UnsupportedOperationException(Const.UNSUPPORTED_ORERATION);
+        throw new UnsupportedOperationException(Const.UNSUPPORTED_OPERATION);
     }
 
     public static Stream<String> readFile(String filePath) throws IOException {

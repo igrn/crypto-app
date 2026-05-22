@@ -1,6 +1,8 @@
 package com.javarush.zelenin.ui.console;
 
-public interface Message {
+import java.io.File;
+
+interface Message {
     String WELCOME = "Welcome to CryptoApp!\n";
     String CURRENT_VERSION = "Current version: v1.0-SNAPSHOT\n";
     String SELECT_MODE = "Select mode: ";
@@ -15,20 +17,14 @@ public interface Message {
             0. Exit
             """ + LINE + SELECT_MODE;
 
-    String INVALID_MODE = "A whole number from 0 to 4 is required.";
-    String[] SELECTED_MODE = {
-            "Application closed.",
-            "\nSelected encryption mode.",
-            "\nSelected decryption mode.",
-            "\nSelected brute-force mode.",
-            "\nSelected analysis mode."
-    };
+    String INVALID_MODE = "A whole number from 0 to 4 is required.\n" + SELECT_MODE;
+    String SELECTED_MODE = "\nSelected %s mode.\n";
 
     String PATH_OPTIONS = """
                - Full path (with file name)
-               - File name only (default path = ./text)
-               - Skip with ENTER (default file = ./text/%s.txt)
-            """;
+               - File name only (default path = .%stext)
+               - Skip with ENTER (default file = .%s%%s)
+            """.formatted(File.separator, File.separator);
     String ENTER_PATH = "Enter path: ";
     String SOURCE_PATH = LINE + "1. Enter source path:\n" + PATH_OPTIONS + LINE + ENTER_PATH;
     String DESTINATION_PATH = LINE + "2. Enter destination path:\n" + PATH_OPTIONS + LINE + ENTER_PATH;
@@ -36,5 +32,6 @@ public interface Message {
 
     String RESULT_OK = "\nTask successful.\nOutput file: %s";
     String RESULT_ERROR = "\nTask failed.\n%s";
+    String RESULT_EXIT = "Application closed.";
 
 }

@@ -1,6 +1,5 @@
 package com.javarush.zelenin.constant;
 
-import java.io.File;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,10 +27,8 @@ public interface Const {
     int SAMPLE_SIZE = 20; //Number of lines of text to be analyzed by an analyzer
 
     String DEFAULT_KEY = "1";
-    String DEFAULT_PATH = "text" + File.separator + "%s.txt";
-    String[] SOURCE_FILENAMES = { "", "text", "encrypted", "encrypted", "encrypted" };
-    String[] DESTINATION_FILENAMES = { "", "encrypted", "decrypted", "bruteforce", "analyzed" };
+    String DEFAULT_PATH = "text%s%s.txt";
     String INCORRECT_FILE = "Incorrect file: ";
-    String UNSUPPORTED_ORERATION = "Unsupported operation";
+    String UNSUPPORTED_OPERATION = "Unsupported operation";
 
 }

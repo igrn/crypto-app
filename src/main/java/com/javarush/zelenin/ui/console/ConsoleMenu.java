@@ -1,8 +1,8 @@
 package com.javarush.zelenin.ui.console;
 
 import com.javarush.zelenin.algorithm.Algorithm;
-import com.javarush.zelenin.dto.Params;
 import com.javarush.zelenin.constant.Const;
+import com.javarush.zelenin.dto.Params;
 import com.javarush.zelenin.dto.Result;
 
 import java.util.Scanner;
@@ -14,43 +14,32 @@ public class ConsoleMenu {
         this.userInput = userInput;
     }
 
-    public Mode selectMode() {
+    Mode selectMode() {
         System.out.print(Message.MODE_SELECTION_MENU);
-        int mode;
         while (true) {
             try {
-                mode = Integer.parseInt(userInput.nextLine());
-                if (mode < 0 || mode > 4) throw new IllegalArgumentException();
-                break;
+                return Mode.fromId(Integer.parseInt(userInput.nextLine()));
             } catch (IllegalArgumentException e) {
-                System.out.println(Message.INVALID_MODE);
-                System.out.print(Message.SELECT_MODE);
+                System.out.print(Message.INVALID_MODE);
             }
         }
-        return Mode.values()[mode];
     }
 
-    public Params createParams(Mode mode) {
-        if (mode == Mode.EXIT) {
-            return new Params("", "", Const.DEFAULT_KEY, Algorithm.CAESAR);
-        }
-        System.out.println(Message.SELECTED_MODE[mode.ordinal()]);
-        String defaultFileName = Const.SOURCE_FILENAMES[mode.ordinal()];
-        System.out.printf(Message.SOURCE_PATH, defaultFileName);
-        String sourcePath = readWithDefault(Const.DEFAULT_PATH.formatted(defaultFileName));
-        defaultFileName = Const.DESTINATION_FILENAMES[mode.ordinal()];
-        System.out.printf(Message.DESTINATION_PATH, defaultFileName);
-        String destinationPath = readWithDefault(Const.DEFAULT_PATH.formatted(defaultFileName));
+    Params buildParams(Mode mode) {
+        if (mode == Mode.EXIT) return Params.EMPTY;
 
-        if (mode.ordinal() > 2) {
+        System.out.printf(Message.SELECTED_MODE, mode.getName());
+        String sourcePath = getParam(Message.SOURCE_PATH, mode.getSource());
+        String destinationPath = getParam(Message.DESTINATION_PATH, mode.getDestination());
+
+        if (mode == Mode.BRUTEFORCE || mode == Mode.ANALYZE) {
             return new Params(sourcePath, destinationPath, Const.DEFAULT_KEY, Algorithm.CAESAR);
         }
-        System.out.printf(Message.ENTER_KEY, Const.DEFAULT_KEY);
-        String key = readWithDefault(Const.DEFAULT_KEY);
+        String key = getParam(Message.ENTER_KEY, Const.DEFAULT_KEY);
         return new Params(sourcePath, destinationPath, key, Algorithm.CAESAR);
     }
 
-    public void printResult(Result result) {
+    void printResult(Result result) {
         switch (result.resultCode()) {
             case OK -> System.out.printf(Message.RESULT_OK, result.message());
             case ERROR -> System.out.printf(Message.RESULT_ERROR, result.message());
@@ -58,12 +47,9 @@ public class ConsoleMenu {
         }
     }
 
-    private String readWithDefault(String defaultInput) {
+    private String getParam(String message, String defaultValue) {
+        System.out.printf(message, defaultValue);
         String input = userInput.nextLine();
-        return input.isBlank() ? defaultInput : input;
-    }
-
-    public enum Mode {
-        EXIT, ENCRYPT, DECRYPT, BRUTEFORCE, ANALYZE
+        return input.isBlank() ? defaultValue : input;
     }
 }
