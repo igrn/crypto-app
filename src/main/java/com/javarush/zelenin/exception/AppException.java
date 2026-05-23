@@ -1,5 +1,8 @@
 package com.javarush.zelenin.exception;
 
+/**
+ * Throws to indicate that the application has failed to execute a task.
+ */
 public class AppException extends RuntimeException {
 
     public AppException() {}

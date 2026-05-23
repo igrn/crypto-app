@@ -5,6 +5,9 @@ import com.javarush.zelenin.dto.Params;
 import com.javarush.zelenin.dto.Result;
 import com.javarush.zelenin.dto.Result.Code;
 
+/**
+ * An object that runs the application in the console.
+ */
 public class ConsoleRunner {
     private final ConsoleMenu consoleMenu;
     private final AppControllers controllers;

@@ -7,6 +7,9 @@ import com.javarush.zelenin.dto.Result;
 
 import java.util.Scanner;
 
+/**
+ * An object responsible for communicating with the user via the console.
+ */
 public class ConsoleMenu {
     private final Scanner userInput;
 

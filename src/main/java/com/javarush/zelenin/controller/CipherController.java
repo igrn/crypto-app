@@ -6,6 +6,9 @@ import com.javarush.zelenin.dto.Result.Code;
 import com.javarush.zelenin.exception.AppException;
 import com.javarush.zelenin.service.CipherService;
 
+/**
+ * A controller for handling encryption tasks.
+ */
 public class CipherController {
     private final CipherService cipherService;
 
@@ -13,6 +16,11 @@ public class CipherController {
         this.cipherService = cipherService;
     }
 
+    /**
+     * Handles the process of encryption.
+     * @param params a {@link Params} object with the required parameters
+     * @return {@link Result} of the task execution (either {@code OK} or {@code ERROR})
+     */
     public Result handleEncryption(Params params) {
         try {
             return cipherService.handleEncryption(params);
@@ -21,6 +29,11 @@ public class CipherController {
         }
     }
 
+    /**
+     * Handles the process of decryption.
+     * @param params a {@link Params} object with the required parameters
+     * @return {@link Result} of the task execution (either {@code OK} or {@code ERROR})
+     */
     public Result handleDecryption(Params params) {
         try {
             return cipherService.handleDecryption(params);

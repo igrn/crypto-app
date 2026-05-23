@@ -12,12 +12,27 @@ import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * A service for analyzing encrypted text files.
+ */
 public class AnalyzerService {
 
+    /**
+     * Finds the key to decrypt a text file using brute-force.
+     * @param params the application's {@link Params} with the correct key unknown
+     * @return same {@link Params} with the correct key guessed by the {@link Analyzer}
+     * @throws AppException if the operation has failed
+     */
     public Params handleBruteForce(Params params) {
         return process(params, Analyzer::findKeyViaBruteForce);
     }
 
+    /**
+     * Finds the key to decrypt a text file using frequency analysis.
+     * @param params the application's {@link Params} with the correct key unknown
+     * @return same {@link Params} with the correct key guessed by the {@link Analyzer}
+     * @throws AppException if the operation has failed
+     */
     public Params handleAnalysis(Params params) {
         return process(params, Analyzer::findKeyViaAnalysis);
     }
