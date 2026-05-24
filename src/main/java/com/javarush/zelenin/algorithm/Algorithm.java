@@ -5,6 +5,7 @@ import com.javarush.zelenin.algorithm.analyzer.CaesarAnalyzer;
 import com.javarush.zelenin.algorithm.cipher.CaesarCipher;
 import com.javarush.zelenin.algorithm.cipher.Cipher;
 
+import java.util.Arrays;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -13,13 +14,15 @@ import java.util.function.Supplier;
  */
 @SuppressWarnings("unchecked")
 public enum Algorithm {
-    CAESAR(CaesarCipher::new, cipher -> new CaesarAnalyzer((CaesarCipher) cipher));
+    CAESAR(1, CaesarCipher::new, cipher -> new CaesarAnalyzer((CaesarCipher) cipher));
 
+    private final int id;
     private final Supplier<Cipher<?>> cipherFactory;
     private final Function<Cipher<?>, Analyzer<?>> analyzerFactory;
 
-    Algorithm(Supplier<Cipher<?>> cipherFactory,
+    Algorithm(Integer id, Supplier<Cipher<?>> cipherFactory,
               Function<Cipher<?>, Analyzer<?>> analyzerFactory) {
+        this.id = id;
         this.cipherFactory = cipherFactory;
         this.analyzerFactory = analyzerFactory;
     }
@@ -40,5 +43,16 @@ public enum Algorithm {
      */
     public <T> Analyzer<T> createAnalyzer(Cipher<T> cipher) {
         return (Analyzer<T>) analyzerFactory.apply(cipher);
+    }
+
+    /**
+     * Finds an algorithm by its id.
+     * @param id id of the algorithm to return
+     * @return the algorithm with the specified id
+     * @throws IllegalArgumentException if the provided id doesn't match any algorithm
+     */
+    public static Algorithm fromId(Integer id) {
+        return Arrays.stream(values()).filter(algorithm -> algorithm.id == id)
+                .findFirst().orElseThrow(IllegalArgumentException::new);
     }
 }
